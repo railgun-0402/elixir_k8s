@@ -7,6 +7,10 @@ defmodule TaskLabWeb.Router do
 
   scope "/api", TaskLabWeb do
     pipe_through :api
+
+    get "/tasks", TaskController, :index
+    post "/tasks", TaskController, :create
+    patch "/tasks/:id/complete", TaskController, :complete
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
