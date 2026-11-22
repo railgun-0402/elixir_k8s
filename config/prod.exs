@@ -7,7 +7,9 @@ config :task_lab, TaskLabWeb.Endpoint,
   force_ssl: [
     rewrite_on: [:x_forwarded_proto],
     exclude: [
-      # paths: ["/health"],
+      # kubeletはPodのIPにHTTPで直接アクセスする。
+      # リダイレクト(301)はプローブ上「成功」扱いになるため、ヘルスチェックは除外する
+      paths: ["/health/live", "/health/ready"],
       hosts: ["localhost", "127.0.0.1"]
     ]
   ]
