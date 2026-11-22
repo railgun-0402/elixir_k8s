@@ -13,6 +13,13 @@ defmodule TaskLabWeb.Router do
     patch "/tasks/:id/complete", TaskController, :complete
   end
 
+  # k8sのプローブ用。Acceptヘッダーに左右されないようパイプラインは通さない
+  # 数秒おきに呼ばれるのでリクエストログは出さない
+  scope "/health", TaskLabWeb do
+    get "/live", HealthController, :live, log: false
+    get "/ready", HealthController, :ready, log: false
+  end
+
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:task_lab, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put

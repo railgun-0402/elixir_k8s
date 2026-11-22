@@ -15,6 +15,7 @@ defmodule TaskLab.Application do
       # Start a worker by calling: TaskLab.Worker.start_link(arg)
       # {TaskLab.Worker, arg},
       # Start to serve requests, typically the last entry
+      TaskLab.TaskServer,
       TaskLabWeb.Endpoint
     ]
 
